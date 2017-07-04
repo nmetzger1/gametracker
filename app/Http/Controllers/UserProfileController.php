@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\userprofile;
+use GuzzleHttp\Client;
 
 class UserProfileController extends Controller
 {
@@ -71,7 +72,14 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bggName = $request->get('name');
+        $client = new Client();
+        $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
+            'query' => ['username' => $bggName]
+        ]);
+        $data = new \SimpleXMLElement($res->getBody()->getContents());
+        dd($data);
+        return redirect(route('user.show',['id' => '1']));
     }
 
     /**
