@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\plays;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\userprofile;
+use jdavidbakr\ReplaceableModel\ReplaceableModel;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 
 class UserProfileController extends Controller
 {
@@ -72,14 +76,35 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //store username
         $bggName = $request->get('name');
+
+        //get data from Board Game Geek
         $client = new Client();
         $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
             'query' => ['username' => $bggName]
         ]);
+
+        //Parse XML data
         $data = new \SimpleXMLElement($res->getBody()->getContents());
-        dd($data);
-        return redirect(route('user.show',['id' => '1']));
+        $json = json_encode($data);
+        $jsonArray = json_decode($json,TRUE);
+
+        //Store bbg data as array
+        $playData = [];
+
+        foreach ($jsonArray["play"] as $play){
+            $playData[] = [
+                'userID' => $id,
+                'name' => $play["item"]["@attributes"]["name"],
+                'date' => $play["@attributes"]["date"],
+                'quantity' => $play["@attributes"]["quantity"]
+            ];
+        }
+
+        plays::insertIgnore($playData);
+
+        return redirect(route('user.show',['id' => $id]));
     }
 
     /**
