@@ -6,7 +6,6 @@ use App\plays;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\userprofile;
-use jdavidbakr\ReplaceableModel\ReplaceableModel;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 
@@ -53,7 +52,16 @@ class UserProfileController extends Controller
     {
         $profile = new userprofile();
         $profile->id = $id;
-        return view('layouts.userprofile', ['profile' => $profile]);
+
+        $playData = DB::table('plays')
+            ->select(DB::raw('name, SUM(quantity) as NumPlays, MAX(date) as LastPlayed'))
+            ->where('userID', '=', $id)
+            ->whereYear('date', date("Y"))
+            ->groupBy('name')
+            ->orderBy('numPlays', 'desc')
+            ->get();
+
+        return view('layouts.userprofile', compact('profile', 'playData'));
     }
 
     /**
