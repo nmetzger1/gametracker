@@ -17,14 +17,13 @@
             <h2>Most Played Games of 2017</h2>
         </div>
         <div class="panel-body">
-            @for($i = 0; $i < count($playData); $i++)
+            @foreach($playData as $game)
 
-                <h4>{{$playData[$i]->name}} - {{$playData[$i]->NumPlays}} </h4>
-                <p>Last Played On: {{$playData[$i]->LastPlayed}}</p>
+                <h4>{{$game->name}} - {{$game->NumPlays}} </h4>
+                <p>Last Played On: {{$game->LastPlayed}}</p>
                 <hr />
 
-                @break($i == 9)
-            @endfor
+            @endforeach
         </div>
     </div>
     <div class="panel">

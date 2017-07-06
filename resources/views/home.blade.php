@@ -8,7 +8,10 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    Leaderboards goes here
+                    <h3>Top Games Played</h3>
+                    @foreach($playData as $game)
+                        <p>{{$game->name}}</p>
+                    @endforeach
                 </div>
             </div>
         </div>

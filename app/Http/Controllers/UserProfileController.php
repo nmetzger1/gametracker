@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\mysql;
 use App\plays;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -50,17 +51,14 @@ class UserProfileController extends Controller
      */
     public function show($id)
     {
+        //Store user info
         $profile = new userprofile();
         $profile->id = $id;
 
-        $playData = DB::table('plays')
-            ->select(DB::raw('name, SUM(quantity) as NumPlays, MAX(date) as LastPlayed'))
-            ->where('userID', '=', $id)
-            ->whereYear('date', date("Y"))
-            ->groupBy('name')
-            ->orderBy('numPlays', 'desc')
-            ->get();
+        //Get info from 'plays' table
+        $playData = mysql::GetTenByTen($id);
 
+        //Render view
         return view('layouts.userprofile', compact('profile', 'playData'));
     }
 
@@ -110,8 +108,10 @@ class UserProfileController extends Controller
             ];
         }
 
+        //Insert into 'plays' table
         plays::insertIgnore($playData);
 
+        //Redirect user to the profile page view
         return redirect(route('user.show',['id' => $id]));
     }
 
