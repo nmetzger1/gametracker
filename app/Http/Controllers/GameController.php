@@ -47,7 +47,7 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        $gameDetail = Game::GetGameById($id);
+        $gameDetail = Game::GetPlaysByGame($id);
 
         return view('gameDetail', ['gameDetail' => $gameDetail]);
     }
