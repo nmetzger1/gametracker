@@ -77,6 +77,20 @@ class plays extends Model
         return $playData;
     }
 
+    static function GetPlaysByUserID($userID){
+        $playData = DB::table('plays')
+            ->join('games', 'games.id', '=', 'plays.gameID')
+            ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, MAX(plays.date) as LastPlayed'))
+            ->where('userID', '=', $userID)
+            ->groupBy('name', 'games.id')
+            ->orderBy('numPlays', 'desc')
+            ->limit(100)
+            ->get();
+
+        return $playData;
+    }
+
+
     static function GetAllPlays(){
 
         $mostPlayed = DB::table('plays')

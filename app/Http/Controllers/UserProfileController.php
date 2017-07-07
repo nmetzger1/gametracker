@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\mysql;
+use App\User;
 use App\plays;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -49,17 +49,22 @@ class UserProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($username)
     {
-        //Store user info
-        $profile = new userprofile();
-        $profile->id = $id;
+        $user = User::where('name', $username)
+            ->first();
 
-        //Get info from 'plays' table
-        $playData = plays::GetTenByTen($id);
+        if(empty($user) == false){
+
+            //Get ten most played games from 'plays' table
+            $tenByTen = plays::GetTenByTen($user->id);
+
+            //Get 50 most played games from 'plays' table
+            $allPlays = plays::GetPlaysByUserID($user->id);
+        }
 
         //Render view
-        return view('userprofile', compact('profile', 'playData'));
+        return view('userprofile', compact('user', 'tenByTen', 'allPlays'));
     }
 
     /**
