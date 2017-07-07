@@ -56,7 +56,7 @@ class UserProfileController extends Controller
         $profile->id = $id;
 
         //Get info from 'plays' table
-        $playData = mysql::GetTenByTen($id);
+        $playData = plays::GetTenByTen($id);
 
         //Render view
         return view('userprofile', compact('profile', 'playData'));
@@ -85,31 +85,7 @@ class UserProfileController extends Controller
         //store username
         $bggName = $request->get('name');
 
-        //get data from Board Game Geek
-        $client = new Client();
-        $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
-            'query' => ['username' => $bggName]
-        ]);
-
-        //Parse XML data
-        $data = new \SimpleXMLElement($res->getBody()->getContents());
-        $json = json_encode($data);
-        $jsonArray = json_decode($json,TRUE);
-
-        //Store bbg data as array
-        $playData = [];
-
-        foreach ($jsonArray["play"] as $play){
-            $playData[] = [
-                'userID' => $id,
-                'name' => $play["item"]["@attributes"]["name"],
-                'date' => $play["@attributes"]["date"],
-                'quantity' => $play["@attributes"]["quantity"]
-            ];
-        }
-
-        //Insert into 'plays' table
-        plays::insertIgnore($playData);
+        plays::SyncUserPlays($bggName, $id);
 
         //Redirect user to the profile page view
         return redirect(route('user.show',['id' => $id]));

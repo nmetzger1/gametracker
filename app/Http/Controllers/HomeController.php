@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\mysql;
+use App\plays;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,7 +21,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $playData = mysql::GetAllPlays();
+        $playData = plays::GetAllPlays();
 
         return view('home', ['playData' => $playData]);
     }
