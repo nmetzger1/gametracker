@@ -66,10 +66,10 @@ class plays extends Model
 
         $playData = DB::table('plays')
             ->join('games', 'games.id', '=', 'plays.gameID')
-            ->select(DB::raw('games.name, SUM(quantity) as NumPlays, MAX(plays.date) as LastPlayed'))
+            ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, MAX(plays.date) as LastPlayed'))
             ->where('userID', '=', $userID)
             ->whereYear('plays.date', date("Y"))
-            ->groupBy('name')
+            ->groupBy('name', 'games.id')
             ->orderBy('numPlays', 'desc')
             ->limit(10)
             ->get();
@@ -81,9 +81,9 @@ class plays extends Model
 
         $mostPlayed = DB::table('plays')
             ->join('games', 'games.id', '=', 'plays.gameID')
-            ->select(DB::raw('games.name, SUM(quantity) as NumPlays, MAX(date) as LastPlayed'))
+            ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, MAX(date) as LastPlayed'))
             ->whereYear('date', date("Y"))
-            ->groupBy('name')
+            ->groupBy('name', 'games.id')
             ->orderBy('numPlays', 'desc')
             ->limit(50)
             ->get();

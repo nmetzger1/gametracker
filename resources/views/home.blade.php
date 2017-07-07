@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <h3>Top Games Played</h3>
                     @foreach($playData as $game)
-                        <p>{{$game->name}}</p>
+                        <p><a href="/game/{{$game->GameID}}">{{$game->name}}</a></p>
                     @endforeach
                 </div>
             </div>

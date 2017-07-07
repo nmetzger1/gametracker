@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Game;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -35,6 +36,7 @@ class GameController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -45,7 +47,9 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        return view('gameDetail', ['id' => $id]);
+        $gameDetail = Game::GetGameById($id);
+
+        return view('gameDetail', ['gameDetail' => $gameDetail]);
     }
 
     /**

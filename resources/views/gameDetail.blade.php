@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="text-center">
-        Hello World!
+        <h1>{{$gameDetail->name}}</h1>
     </div>
 @endsection

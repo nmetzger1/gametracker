@@ -19,7 +19,7 @@
         <div class="panel-body">
             @foreach($playData as $game)
 
-                <h4>{{$game->name}} - {{$game->NumPlays}} </h4>
+                <h4><a href="/game/{{$game->GameID}}">{{$game->name}}</a> - {{$game->NumPlays}} </h4>
                 <p>Last Played On: {{$game->LastPlayed}}</p>
                 <hr />
 
