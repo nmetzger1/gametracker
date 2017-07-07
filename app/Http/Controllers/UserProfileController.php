@@ -59,7 +59,7 @@ class UserProfileController extends Controller
         $playData = mysql::GetTenByTen($id);
 
         //Render view
-        return view('layouts.userprofile', compact('profile', 'playData'));
+        return view('userprofile', compact('profile', 'playData'));
     }
 
     /**
