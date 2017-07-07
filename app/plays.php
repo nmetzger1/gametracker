@@ -38,26 +38,36 @@ class plays extends Model
     static function GetBggData($bggUsername){
         //get data from Board Game Geek
         $client = new Client();
-        $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
-            'query' => ['username' => $bggUsername]
-        ]);
 
-        //Parse XML data
-        $data = new \SimpleXMLElement($res->getBody()->getContents());
-        $json = json_encode($data);
-        $jsonArray = json_decode($json,TRUE);
-
-        //Store bbg data as array
+        $i = 1;
+        $totalRecords = 0;
         $playData = [];
 
-        foreach ($jsonArray["play"] as $play){
-            $playData[] = [
-                'name' => $play["item"]["@attributes"]["name"],
-                'date' => $play["@attributes"]["date"],
-                'quantity' => $play["@attributes"]["quantity"],
-                'bggID' => $play["item"]["@attributes"]["objectid"]
-            ];
-        }
+        do {
+
+            $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
+                'query' => ['username' => $bggUsername, 'page' => $i]
+            ]);
+
+            //Parse XML data
+            $data = new \SimpleXMLElement($res->getBody()->getContents());
+            $json = json_encode($data);
+            $jsonArray = json_decode($json, TRUE);
+
+            //Update info for loop
+            $i++;
+            $totalRecords = intval($jsonArray["@attributes"]["total"]);
+
+            foreach ($jsonArray["play"] as $play) {
+                $playData[] = [
+                    'name' => $play["item"]["@attributes"]["name"],
+                    'date' => $play["@attributes"]["date"],
+                    'quantity' => $play["@attributes"]["quantity"],
+                    'bggID' => $play["item"]["@attributes"]["objectid"]
+                ];
+            }
+
+        } while (($i * 100) <= $totalRecords);
 
         return $playData;
     }
