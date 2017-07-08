@@ -17,6 +17,7 @@
                     <p><input type="submit" value="Sync with BoardGameGeek" /></p>
                     {{csrf_field()}}
                 </form>
+                <div><p>Coming Soon - Sync your Collection</p></div>
             </div>
         @endif
         <div class="panel">
