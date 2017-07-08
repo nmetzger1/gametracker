@@ -15,9 +15,9 @@ class Game extends Model
         $plays = DB::table('plays')
             ->join('users', 'users.id', '=', 'plays.userID')
             ->join('games', 'games.id', '=', 'plays.gameID')
-            ->select(DB::raw('users.name as Username, games.name as GameName, SUM(quantity) as NumPlays'))
+            ->select(DB::raw('users.name as Username, games.name as GameName, SUM(quantity) as NumPlays, games.bggID'))
             ->where(['plays.gameID' => $id])
-            ->groupBy('users.name','games.name')
+            ->groupBy('users.name','games.name', 'games.bggID')
             ->orderBy('numPlays', 'desc')
             ->limit(50)
             ->get();
