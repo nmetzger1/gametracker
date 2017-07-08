@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'BoardGameTracker'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('qDw76auS90De4nsZmsySPdia5ykMNLGM'),
+    'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        BoardGameTracker\Providers\AppServiceProvider::class,
+        BoardGameTracker\Providers\AuthServiceProvider::class,
+        // BoardGameTracker\Providers\BroadcastServiceProvider::class,
+        BoardGameTracker\Providers\EventServiceProvider::class,
+        BoardGameTracker\Providers\RouteServiceProvider::class,
 
     ],
 

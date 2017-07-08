@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace BoardGameTracker\Http\Controllers;
 
-use App\Game;
+use BoardGameTracker\Game;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -47,9 +47,18 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        $gameDetail = Game::GetPlaysByGame($id);
+        //Get Plays by ALL users
+        $gamePlays = Game::GetPlaysByGame($id);
 
-        return view('gameDetail', ['gameDetail' => $gameDetail]);
+        //Get BGG ID
+        $bggID = Game::find($id);
+
+        //Get Details from BGG API
+        $gameDetail = Game::GetBggDetailsById($bggID->bggID);
+
+//       dd($gameDetail);
+        //Return View
+        return view('gameDetail', compact('gamePlays', 'gameDetail'));
     }
 
     /**

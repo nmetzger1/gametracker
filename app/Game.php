@@ -1,9 +1,10 @@
 <?php
 
-namespace App;
+namespace BoardGameTracker;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
 
 class Game extends Model
 {
@@ -23,5 +24,20 @@ class Game extends Model
             ->get();
 
         return $plays;
+    }
+
+    static function GetBggDetailsById($bggID){
+
+        $client = new Client();
+
+        $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/thing', [
+            'query' => ['id' => $bggID]
+        ]);
+
+        $data = new \SimpleXMLElement($res->getBody()->getContents());
+        $json = json_encode($data);
+        $jsonArray = json_decode($json, TRUE);
+
+        return $jsonArray;
     }
 }

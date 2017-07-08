@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace BoardGameTracker\Http\Controllers;
 
-use App\User;
-use App\plays;
+use BoardGameTracker\User;
+use BoardGameTracker\plays;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\userprofile;
+use BoardGameTracker\userprofile;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 

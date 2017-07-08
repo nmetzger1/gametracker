@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace BoardGameTracker\Http\Controllers;
 
-use App\mysql;
-use App\plays;
+use BoardGameTracker\mysql;
+use BoardGameTracker\plays;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

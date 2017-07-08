@@ -2,8 +2,17 @@
 
 @section('content')
     <div class="text-center">
-        <h1>{{$gameDetail[0]->GameName}}</h1>
-        <p><a href="https://boardgamegeek.com/boardgame/{{$gameDetail[0]->bggID}}" target="_blank">View on BoardGameGeek</a> </p>
+        <h1>{{$gamePlays[0]->GameName}}</h1>
+        <img src="{{$gameDetail["item"]["image"]}}">
+        <p><a href="https://boardgamegeek.com/boardgame/{{$gamePlays[0]->bggID}}" target="_blank">View on BoardGameGeek</a></p>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel panel-heading">
+            Description:
+        </div>
+        <div class="panel panel-body">
+            {{$gameDetail["item"]["description"]}}
+        </div>
     </div>
     <div class="panel panel-default">
         <div class="panel panel-heading">
@@ -11,11 +20,10 @@
         </div>
         <div class="panel panel-body">
 
-            @foreach($gameDetail as $user)
+            @foreach($gamePlays as $user)
                 <p><a href="/user/{{$user->Username}}">{{$user->Username}}</a> - {{$user->NumPlays}}</p>
             @endforeach
 
         </div>
     </div>
-
 @endsection

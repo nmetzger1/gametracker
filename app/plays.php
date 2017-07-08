@@ -6,7 +6,7 @@
  * Time: 9:27 PM
  */
 
-namespace App;
+namespace BoardGameTracker;
 use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +45,7 @@ class plays extends Model
 
         do {
 
-            $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
+                $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
                 'query' => ['username' => $bggUsername, 'page' => $i]
             ]);
 
@@ -106,7 +106,6 @@ class plays extends Model
         $mostPlayed = DB::table('plays')
             ->join('games', 'games.id', '=', 'plays.gameID')
             ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, MAX(date) as LastPlayed'))
-            ->whereYear('date', date("Y"))
             ->groupBy('name', 'games.id')
             ->orderBy('numPlays', 'desc')
             ->limit(50)
