@@ -87,16 +87,13 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //get gametracker username
-        $user = User::find($id);
-
         //store bgg username
         $bggName = $request->get('name');
 
         plays::SyncUserPlays($bggName, $id);
 
         //Redirect user to the profile page view
-        return redirect(route('user.show',['id' => $user->name]));
+        return redirect(route('user.show',['id' => $bggName]));
     }
 
     /**

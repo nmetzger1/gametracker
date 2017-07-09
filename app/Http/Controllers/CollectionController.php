@@ -72,6 +72,9 @@ class CollectionController extends Controller
         $bggUsername = $request->get('name');
 
         Collection::StoreUserCollection($bggUsername, $id);
+
+        return redirect(route('user.show',['id' => $bggUsername]));
+
     }
 
     /**
