@@ -12,12 +12,17 @@
         @else
             <div>
                 <form method="post" action="{{route('user.update', ['id' => $user->id])}}">
-                    <p>Enter BoardGameGeek Username:<input type="text" name="name" /></p>
+                    <input type="hidden" name="name" value="{{Auth::user()->name}}" />
                     {{method_field('PUT')}}
-                    <p><input type="submit" value="Sync with BoardGameGeek" /></p>
+                    <input type="submit" value="Sync Plays with BoardGameGeek" />
                     {{csrf_field()}}
                 </form>
-                <div><p>Coming Soon - Sync your Collection</p></div>
+                <form method="post" action="{{route('collection.update', ['id' => $user->id])}}">
+                    <input type="hidden" name="name" value="{{Auth::user()->name}}" />
+                    {{method_field('PUT')}}
+                    <input type="submit" value="Sync Collection with BoardGameGeek" />
+                    {{csrf_field()}}
+                </form>
             </div>
         @endif
         <div class="panel">
