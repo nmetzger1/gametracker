@@ -51,7 +51,7 @@
         </div>
         <div class="panel">
             <div class="panel panel-heading">
-                <h2>Games you have played in 6 months</h2>
+                <h2>Games you haven't played in 6 months</h2>
             </div>
             <div class="panel panel-body">
                 @foreach($noPlays as $game)
