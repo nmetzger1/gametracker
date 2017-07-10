@@ -49,6 +49,20 @@
                 @endforeach
             </div>
         </div>
+        <div class="panel">
+            <div class="panel panel-heading">
+                <h2>Games you have played in 6 months</h2>
+            </div>
+            <div class="panel panel-body">
+                @foreach($noPlays as $game)
+                    @if(is_null($game->LastPlayed))
+                        <p><a href="/game/{{$game->gameID}}">{{$game->name}}</a> - No Play Logged</p>
+                    @else
+                        <p><a href="/game/{{$game->gameID}}">{{$game->name}}</a> - Last Played: {{$game->LastPlayed}}</p>
+                    @endif
+                @endforeach
+            </div>
+        </div>
     @endif
 
 @endsection

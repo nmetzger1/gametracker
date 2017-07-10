@@ -11,6 +11,16 @@ class Game extends Model
     //Allows for mass update of columns in 'games' table
     protected $guarded = [];
 
+    //Set relation to plays
+    public function plays(){
+        $this->hasMany('App\plays');
+    }
+
+    //Set relation to collections
+    public function collections(){
+        $this->hasMany('App\Collection');
+    }
+
     static function GetPlaysByGame($id){
 
         $plays = DB::table('plays')

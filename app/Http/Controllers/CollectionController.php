@@ -85,6 +85,6 @@ class CollectionController extends Controller
      */
     public function destroy(Collection $collection)
     {
-        //
+
     }
 }

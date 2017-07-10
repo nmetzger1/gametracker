@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //Set relation to plays
+    public function plays(){
+        $this->hasMany('App\plays');
+    }
+
+    //Set relation to collections
+    public function collections(){
+        $this->hasMany('App\Collection');
+    }
 }

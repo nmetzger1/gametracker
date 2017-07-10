@@ -2,6 +2,7 @@
 
 namespace BoardGameTracker\Http\Controllers;
 
+use BoardGameTracker\Collection;
 use BoardGameTracker\User;
 use BoardGameTracker\plays;
 use Illuminate\Database\Eloquent\Model;
@@ -61,10 +62,12 @@ class UserProfileController extends Controller
 
             //Get 50 most played games from 'plays' table
             $allPlays = plays::GetPlaysByUserID($user->id);
+
+            $noPlays = Collection::GetNoPlaysLastSixMonth($user->id);
         }
 
         //Render view
-        return view('userprofile', compact('user', 'tenByTen', 'allPlays'));
+        return view('userprofile', compact('user', 'tenByTen', 'allPlays', 'noPlays'));
     }
 
     /**

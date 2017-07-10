@@ -18,6 +18,16 @@ class plays extends Model
     //Allows all columns to be updated in bulk
     protected $guarded = [];
 
+    //Set relation to User
+    public function users(){
+        $this->hasMany('App\User');
+    }
+
+    //Set relation to Games
+    public function games(){
+        $this->hasMany('App\Game');
+    }
+
     static function SyncUserPlays($bggUsername, $userID){
 
         $bggData = plays::GetBggData($bggUsername);
