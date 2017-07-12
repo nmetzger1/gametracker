@@ -30,18 +30,31 @@ class plays extends Model
 
     static function SyncUserPlays($bggUsername, $userID){
 
+
         $bggData = plays::GetBggData($bggUsername);
 
-        foreach ($bggData as $play){
+        DB::transaction(function () use ($bggData, $userID) {
 
-            $game = Game::firstOrCreate(
-                ['name' => $play["name"]], ['bggID' => $play["bggID"]]
-            );
+            foreach ($bggData as $play){
 
-            $newPlay = plays::firstOrCreate(
-              ['userID' => $userID, 'gameID' => $game["id"], 'date' => $play["date"]], ['quantity' => $play["quantity"]]
-            );
-        }
+                $game = Game::firstOrCreate(
+                    ['name' => $play["name"]], ['bggID' => $play["bggID"]]
+                );
+
+                $newPlay = plays::firstOrCreate(
+                    [
+                        'bggPlayId' => $play["bggPlayID"],
+                    ],
+                    [
+                        'userID' => $userID,
+                        'gameID' => $game["id"],
+                        'date' => $play["date"],
+                        'quantity' => $play["quantity"],
+                        'length' => $play["length"]
+                    ]
+                );
+            }
+        });
 
     }
 
@@ -54,8 +67,7 @@ class plays extends Model
         $playData = [];
 
         do {
-
-                $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
+            $res = $client->request('GET', 'https://www.boardgamegeek.com/xmlapi2/plays', [
                 'query' => ['username' => $bggUsername, 'page' => $i]
             ]);
 
@@ -69,11 +81,14 @@ class plays extends Model
             $totalRecords = intval($jsonArray["@attributes"]["total"]);
 
             foreach ($jsonArray["play"] as $play) {
+
                 $playData[] = [
                     'name' => $play["item"]["@attributes"]["name"],
                     'date' => $play["@attributes"]["date"],
                     'quantity' => $play["@attributes"]["quantity"],
-                    'bggID' => $play["item"]["@attributes"]["objectid"]
+                    'bggID' => $play["item"]["@attributes"]["objectid"],
+                    'bggPlayID' => $play["@attributes"]["id"],
+                    'length' => $play["@attributes"]["length"]
                 ];
             }
 

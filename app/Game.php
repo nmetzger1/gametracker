@@ -50,4 +50,10 @@ class Game extends Model
 
         return $jsonArray;
     }
+
+    static function GetUserGameStats($userID, $gameID){
+
+
+
+    }
 }

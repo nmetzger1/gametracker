@@ -26,4 +26,17 @@
 
         </div>
     </div>
+
+        <div class="panel panel-default">
+            <div class="panel panel-heading">Your Stats</div>
+            @if (Auth::guest())
+                <div class="panel panel-body">
+                    Sign In / Register to See Your Stats
+                </div>
+            @else
+                <div class="panel panel-body">
+                    Your Stats
+                </div>
+            @endif
+        </div>
 @endsection
