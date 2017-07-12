@@ -4,6 +4,8 @@ namespace BoardGameTracker\Http\Controllers;
 
 use BoardGameTracker\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use BoardGameTracker\plays;
 
 class GameController extends Controller
 {
@@ -56,9 +58,15 @@ class GameController extends Controller
         //Get Details from BGG API
         $gameDetail = Game::GetBggDetailsById($bggID->bggID);
 
+        //Get plays if user is logged in
+        $userPlays = [];
+        if(Auth::check()){
+            $userPlays = plays::GetPlayByGameAndUserId($id, Auth::user()->id);
+        }
+
 //       dd($gameDetail);
         //Return View
-        return view('gameDetail', compact('gamePlays', 'gameDetail'));
+        return view('gameDetail', compact('gamePlays', 'gameDetail', 'userPlays'));
     }
 
     /**

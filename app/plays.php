@@ -112,6 +112,43 @@ class plays extends Model
         return $playData;
     }
 
+    static function GetPlayByGameAndUserId($gameID, $userID){
+
+        $numPlays = 0;
+        $timeInMinutes = 0;
+        $timeFormatted = "";
+
+        $tableData = DB::table('plays')
+            //->select('quantity', 'length')
+            ->where([
+                ['gameID', '=', $gameID],
+                ['userID', '=', $userID]
+            ])->get();
+
+        foreach ($tableData as $play){
+            $numPlays += $play->quantity;
+            $timeInMinutes += $play->length;
+        }
+
+        if($timeInMinutes == 0){
+            $timeFormatted = "No Data";
+        }
+        else{
+            $hours = floor($timeInMinutes / 60);
+            $days = floor($hours / 24);
+            $minutes = ($timeInMinutes % 60);
+            $timeFormatted = $days . " days " . $hours . " hours and " . $minutes . " minutes";
+        }
+
+        $playData = [
+            'count' => $numPlays,
+            'time' => $timeFormatted
+        ];
+
+        return $playData;
+
+    }
+
     static function GetPlaysByUserID($userID){
         $playData = DB::table('plays')
             ->join('games', 'games.id', '=', 'plays.gameID')

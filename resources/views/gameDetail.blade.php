@@ -35,7 +35,8 @@
                 </div>
             @else
                 <div class="panel panel-body">
-                    Your Stats
+                    <p>Number of Plays: {{$userPlays["count"]}}</p>
+                    <p>Number of Plays: {{$userPlays["time"]}}</p>
                 </div>
             @endif
         </div>
