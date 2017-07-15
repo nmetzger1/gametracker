@@ -101,7 +101,7 @@ class plays extends Model
 
         $playData = DB::table('plays')
             ->join('games', 'games.id', '=', 'plays.gameID')
-            ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, MAX(plays.date) as LastPlayed'))
+            ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, DATE_FORMAT(MAX(plays.date), "%c/%d") as LastPlayed'))
             ->where('userID', '=', $userID)
             ->whereYear('plays.date', date("Y"))
             ->groupBy('name', 'games.id')

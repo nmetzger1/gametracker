@@ -1,5 +1,6 @@
+/*Common Elements --------------------------------------------*/
 body{
-    background-color: #052950;
+    background-color: #E0E0E0  ;
 }
 
 a.navbar-brand{
@@ -15,6 +16,12 @@ a.navbar-brand{
     min-width: 10px;
 }
 
+.row{
+    margin: 0;
+}
+/*End Common --------------------------------------------------------*/
+
+/*Home Page ---------------------------------------------------------*/
 .main-img-div{
     max-width: 50%;
     display: inline-block;
@@ -34,7 +41,66 @@ a.navbar-brand{
 }
 
 .main-text-div{
-    font-size: large;
-    padding: 5%;
+    font-size: xx-large;
+    padding: 8% 2%;
+        color: #ffffff;
+    font-family: 'Abel', sans-serif;
+}
+
+/*End Home Page ---------------------------------------*/
+
+/*User Profile Page -----------------------------------*/
+
+.profile-header{
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.table-title{
+    background-color: #6796CC;
+    border-top: 15px solid #052950;
+    padding: 3%;
+    color: #ffffff;
+    text-align: center;
+}
+
+.table-title h2{
+    margin: 0;
+}
+
+.header-div{
+    background-color: #6796CC;
+    padding: 2%;
+    margin-top: 0;
+}
+
+form {
+    display: inline;
+}
+
+.sync-buttons{
+    margin: 2%;
+}
+
+.btn-sync{
+    background-color: #052950;
     color: #ffffff;
 }
+
+.user-table{
+    margin: 3%;
+    color: #2a88bd;
+    background-color: #ffffff;
+    padding: 0;
+    border-bottom: 5px solid #FFDFAD;
+}
+
+table>tbody>tr>td{
+    font-size: medium;
+}
+
+thead{
+    color: #2a88bd;
+}
+
+/*End User Profile-------------------------------------*/
