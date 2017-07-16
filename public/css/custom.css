@@ -103,4 +103,24 @@ thead{
     color: #2a88bd;
 }
 
+.tenByten{
+    background-color: #052950;
+    text-align: center;
+    margin-top: 3%;
+    color: #ffffff;
+    padding: 0;
+
+}
+
+.tenByTen-main{
+    background-color: #ffffff;
+    height: 15em;
+}
+
+#donutchart{
+    border-bottom: 5px solid #FFDFAD;
+}
+
+
+/*END DONUT CHART*/
 /*End User Profile-------------------------------------*/

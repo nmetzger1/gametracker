@@ -58,7 +58,10 @@ class UserProfileController extends Controller
         if(empty($user) == false){
 
             //Get ten most played games from 'plays' table
-            $tenByTen = plays::GetTenByTen($user->id);
+            $currentYear = plays::PlaysByCurrentYear($user->id);
+
+            //Get 10x10 Percentage
+            $tenByTen = plays::TenByTenPercentages($user->id);
 
             //Get 50 most played games from 'plays' table
             $allPlays = plays::GetPlaysByUserID($user->id);
@@ -67,7 +70,7 @@ class UserProfileController extends Controller
         }
 
         //Render view
-        return view('userprofile', compact('user', 'tenByTen', 'allPlays', 'noPlays'));
+        return view('userprofile', compact('user', 'tenByTen', 'allPlays', 'noPlays', 'currentYear'));
     }
 
     /**

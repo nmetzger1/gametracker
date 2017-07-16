@@ -1,4 +1,22 @@
 @extends('layouts.app')
+@if(empty($user) == false)
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable({!! json_encode($tenByTen) !!});
+
+            var options = {
+                pieHole: 0.3,
+                legend: 'none'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+        }
+    </script>
+@endif
 
 @section('content')
     {{--PROFILE HEADER--}}
@@ -44,7 +62,7 @@
                             <th>Last Played</th>
                         </tr>
                         </thead>
-                        @foreach($tenByTen as $game)
+                        @foreach($currentYear as $game)
 
                             <tr>
                                 <td><a href="/game/{{$game->GameID}}">{{$game->name}}</a></td>
@@ -54,7 +72,14 @@
 
                         @endforeach
                     </table>
-                    {{--</div>--}}
+                </div>
+                <div class="tenByten col-md-4">
+                    <div class="tenByTen-main">
+                        <div class="table-title">
+                            <h2>10x10 Progress</h2>
+                        </div>
+                        <div id="donutchart" style="width: 100%; height: 450px"></div>
+                    </div>
                 </div>
             </div>
             <div class="row user-history">
@@ -78,7 +103,6 @@
                     </table>
                 </div>
 
-                <div class="container-fluid col-md-1"></div>
 
                 <div class="user-table sixmonths col-md-5">
                     <div class="table-title">

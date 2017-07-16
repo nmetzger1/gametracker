@@ -97,7 +97,7 @@ class plays extends Model
         return $playData;
     }
 
-    static function GetTenByTen($userID){
+    static function PlaysByCurrentYear($userID){
 
         $playData = DB::table('plays')
             ->join('games', 'games.id', '=', 'plays.gameID')
@@ -110,6 +110,39 @@ class plays extends Model
             ->get();
 
         return $playData;
+    }
+
+    static function TenByTenPercentages($userID){
+
+        $data = plays::PlaysByCurrentYear($userID);
+
+        $percents = [];
+        $playCount = 0;
+
+        $percents[] = ['Game','Plays'];
+
+        foreach ($data as $game){
+
+            $gameCount = 0;
+
+            if($game->NumPlays > 9){
+                $gameCount = 10;
+            }
+            else{
+                $gameCount = intval($game->NumPlays);
+            }
+
+            $percents[] = [$game->name, $gameCount];
+
+            $playCount += $gameCount;
+        }
+
+        $percents[] = ['Plays Left', 100 - $playCount];
+
+        //dd($percents);
+
+        return $percents;
+
     }
 
     static function GetPlayByGameAndUserId($gameID, $userID){
