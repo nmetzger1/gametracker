@@ -4,8 +4,9 @@
     <script type="text/javascript">
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
+        var gameArray = {!! json_encode($tenByTen) !!}
         function drawChart() {
-            var data = google.visualization.arrayToDataTable({!! json_encode($tenByTen) !!});
+            var data = google.visualization.arrayToDataTable(gameArray);
 
             var options = {
                 pieHole: 0.3,

@@ -116,11 +116,34 @@ thead{
     background-color: #ffffff;
     height: 15em;
 }
-
+/*DONUT CHART*/
 #donutchart{
     border-bottom: 5px solid #FFDFAD;
 }
-
-
 /*END DONUT CHART*/
 /*End User Profile-------------------------------------*/
+/*GAME DETAILS*/
+
+.img-div{
+    background-color: #6796CC;
+    padding-top: 2%;
+}
+
+.img-div h1{
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.game-img{
+    max-height: 500px;
+}
+
+.game-stats{
+    margin-top: 3%;
+}
+
+.bgg-link{
+    margin: 1%;
+    background-color: #052950;
+    color: #ffffff;
+}
