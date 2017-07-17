@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="img-div text-center">
+        {{--Check BGG API if name is stored in array--}}
         @if(count($gameDetail["item"]["name"]) > 1)
             <h1>{{$gameDetail["item"]["name"][0]["@attributes"]["value"]}}</h1>
         @else
             <h1>{{$gameDetail["item"]["name"]["@attributes"]["value"]}}</h1>
         @endif
         <img src="{{$gameDetail["item"]["image"]}}" class="game-img">
-        {{--{{dd($gameDetail)}}--}}
         <p><a class="btn btn-default bgg-link" href="https://boardgamegeek.com/boardgame/{{$gameDetail["item"]["@attributes"]["id"]}}" target="_blank" role="button">View on BoardGameGeek</a></p>
     </div>
     <div class="panel panel-default">

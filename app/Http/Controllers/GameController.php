@@ -49,11 +49,15 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        //Get Plays by ALL users
-        $gamePlays = Game::GetPlaysByGame($id);
-
         //Get BGG ID
         $bggID = Game::find($id);
+
+        if(is_null($bggID)){
+            abort(404, "Could not find game.");
+        }
+
+        //Get Plays by ALL users
+        $gamePlays = Game::GetPlaysByGame($id);
 
         //Get Details from BGG API
         $gameDetail = Game::GetBggDetailsById($bggID->bggID);
