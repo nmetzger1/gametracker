@@ -16,7 +16,7 @@
 
     <!--Googel Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
-    <link href="{{ secure_asset(('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('css/custom.css') }}" rel="stylesheet">
 
     @yield('script')
