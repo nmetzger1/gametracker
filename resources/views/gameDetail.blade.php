@@ -2,9 +2,14 @@
 
 @section('content')
     <div class="img-div text-center">
-        <h1>{{$gamePlays[0]->GameName}}</h1>
+        @if(count($gameDetail["item"]["name"]) > 1)
+            <h1>{{$gameDetail["item"]["name"][0]["@attributes"]["value"]}}</h1>
+        @else
+            <h1>{{$gameDetail["item"]["name"]["@attributes"]["value"]}}</h1>
+        @endif
         <img src="{{$gameDetail["item"]["image"]}}" class="game-img">
-        <p><a class="btn btn-default bgg-link" href="https://boardgamegeek.com/boardgame/{{$gamePlays[0]->bggID}}" target="_blank" role="button">View on BoardGameGeek</a></p>
+        {{--{{dd($gameDetail)}}--}}
+        <p><a class="btn btn-default bgg-link" href="https://boardgamegeek.com/boardgame/{{$gameDetail["item"]["@attributes"]["id"]}}" target="_blank" role="button">View on BoardGameGeek</a></p>
     </div>
     <div class="panel panel-default">
         <div class="panel panel-heading">

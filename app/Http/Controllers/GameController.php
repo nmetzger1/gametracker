@@ -64,7 +64,6 @@ class GameController extends Controller
             $userPlays = plays::GetPlayByGameAndUserId($id, Auth::user()->id);
         }
 
-//       dd($gameDetail);
         //Return View
         return view('gameDetail', compact('gamePlays', 'gameDetail', 'userPlays'));
     }
