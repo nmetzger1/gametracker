@@ -4,13 +4,28 @@
     <script type="text/javascript">
         google.charts.load("current", {packages:["corechart"]});
         google.charts.setOnLoadCallback(drawChart);
-        var gameArray = {!! json_encode($tenByTen) !!}
+        var gameArray = {!! json_encode($tenByTen) !!};
+        var color = '';
         function drawChart() {
             var data = google.visualization.arrayToDataTable(gameArray);
 
+            if(gameArray[1][1] < 25){
+                color = "red"
+            }
+            else if (gameArray[1][1] < 80){
+                color = "yellow"
+            }
+            else {
+                color = "green"
+            }
+
             var options = {
                 pieHole: 0.3,
-                legend: 'none'
+                legend: 'none',
+                slices: {
+                    0: { color: color },
+                    1: { color: 'transparent' }
+                }
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -77,7 +92,7 @@
                 <div class="tenByten col-md-4">
                     <div class="tenByTen-main">
                         <div class="table-title">
-                            <h2>10x10 Progress</h2>
+                            <h2>10x10 Challenge</h2>
                         </div>
                         <div id="donutchart" style="width: 100%; height: 450px"></div>
                     </div>

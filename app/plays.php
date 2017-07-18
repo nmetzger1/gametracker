@@ -132,11 +132,13 @@ class plays extends Model
                 $gameCount = intval($game->NumPlays);
             }
 
-            $percents[] = [$game->name, $gameCount];
-
             $playCount += $gameCount;
         }
 
+        //Add Games Played to Array
+        $percents[] = ['Games Played', $playCount];
+
+        //Add plays remaining to array
         $percents[] = ['Plays Left', 100 - $playCount];
 
         return $percents;
