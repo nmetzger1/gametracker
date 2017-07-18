@@ -139,8 +139,6 @@ class plays extends Model
 
         $percents[] = ['Plays Left', 100 - $playCount];
 
-        //dd($percents);
-
         return $percents;
 
     }
@@ -195,17 +193,16 @@ class plays extends Model
         return $playData;
     }
 
+    static function UsersWithMostPlays(){
 
-    static function GetAllPlays(){
-
-        $mostPlayed = DB::table('plays')
-            ->join('games', 'games.id', '=', 'plays.gameID')
-            ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, MAX(date) as LastPlayed'))
-            ->groupBy('name', 'games.id')
-            ->orderBy('numPlays', 'desc')
-            ->limit(50)
+        $userData = DB::table('plays')
+            ->join('users', 'users.id', '=', 'plays.userID')
+            ->select('users.name', DB::raw('SUM(quantity) as Plays'))
+            ->limit(25)
+            ->groupBy('users.name')
+            ->orderBy('Plays', 'desc')
             ->get();
 
-        return $mostPlayed;
+        return $userData;
     }
 }

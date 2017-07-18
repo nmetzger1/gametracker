@@ -51,9 +51,16 @@ class Game extends Model
         return $jsonArray;
     }
 
-    static function GetUserGameStats($userID, $gameID){
+    static function GetAllPlays(){
 
+        $mostPlayed = DB::table('plays')
+            ->join('games', 'games.id', '=', 'plays.gameID')
+            ->select(DB::raw('games.name, games.id as GameID, SUM(quantity) as NumPlays, MAX(date) as LastPlayed'))
+            ->groupBy('name', 'games.id')
+            ->orderBy('numPlays', 'desc')
+            ->limit(50)
+            ->get();
 
-
+        return $mostPlayed;
     }
 }

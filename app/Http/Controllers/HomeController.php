@@ -21,8 +21,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $playData = plays::GetAllPlays();
-
-        return view('home', ['playData' => $playData]);
+        return view('home');
     }
 }
