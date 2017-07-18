@@ -13,7 +13,7 @@
                 color = "red"
             }
             else if (gameArray[1][1] < 80){
-                color = "yellow"
+                color = "orange"
             }
             else {
                 color = "green"
