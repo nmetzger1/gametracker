@@ -42,9 +42,13 @@ a.navbar-brand{
 
 .main-text-div{
     font-size: xx-large;
-    padding: 8% 2%;
-        color: #ffffff;
+    padding: 8% 2% 0 2%;
+    color: #ffffff;
     font-family: 'Abel', sans-serif;
+}
+
+.main-login a{
+    color: #052950;
 }
 
 /*End Home Page ---------------------------------------*/
