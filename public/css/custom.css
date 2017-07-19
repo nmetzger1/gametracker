@@ -1,8 +1,7 @@
 /*Common Elements --------------------------------------------*/
 body{
-    background-color: #E0E0E0  ;
+    background-color: #ffffff;
 }
-
 a.navbar-brand{
     padding: 0;
 }
@@ -18,6 +17,10 @@ a.navbar-brand{
 
 .row{
     margin: 0;
+}
+
+.header-div{
+    border-bottom: 2px solid #052950;
 }
 /*End Common --------------------------------------------------------*/
 
@@ -98,6 +101,7 @@ form {
     background-color: #ffffff;
     padding: 0;
     border-bottom: 5px solid #FFDFAD;
+    box-shadow: 1px 1px 10px #052950;
 }
 
 table>tbody>tr>td{
@@ -119,12 +123,15 @@ thead{
 
 .tenByTen-main{
     background-color: #ffffff;
-    height: 15em;
-}
-/*DONUT CHART*/
-#donutchart{
     border-bottom: 5px solid #FFDFAD;
+    box-shadow: 1px 1px 10px #052950;
+    height: auto;
 }
+
+.tenByTen-main .panel-body{
+    color: #052950;
+}
+
 /*END DONUT CHART*/
 /*End User Profile-------------------------------------*/
 /*GAME DETAILS*/

@@ -16,9 +16,7 @@
 
     <!--Googel Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
-    {{--<link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    {{--<link href="{{ secure_asset('css/custom.css') }}" rel="stylesheet">--}}
     <link href="{{ secure_asset('css/custom.css') }}" rel="stylesheet">
 
     @yield('script')
@@ -89,6 +87,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ secure_asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

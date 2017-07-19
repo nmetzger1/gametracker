@@ -95,6 +95,20 @@
                             <h2>10x10 Challenge</h2>
                         </div>
                         <div id="donutchart" style="width: 100%; height: 450px"></div>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">What is this?</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        The challenge is to play TEN GAMES TEN TIMES EACH within a year.  This site tracks your ten most played games for the current year.  Each play per game is counted (with a max of 10) then subtracted from 100 to determine your percentage.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
